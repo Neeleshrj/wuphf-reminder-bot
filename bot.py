@@ -33,7 +33,7 @@ db = firestore.client()  # this connects to our Firestore database
 # collection = db.collection('tasks')  # opens 'tasks' collection
 
 
-bot = commands.Bot(command_prefix = '>', description="Simple reminder Bot for sending reminders.")
+bot = commands.Bot(command_prefix = '>', description="Simple reminder Bot for sending regular reminders.")
 
 server_list=[]
 
@@ -73,7 +73,8 @@ async def check_reminder(server_list):
                     embed.add_field(name="Date:",value=f'{doc.to_dict().get("date")}',inline=True)
                     embed.add_field(name="Time:",value=f'{doc.to_dict().get("time")}',inline=True)    
                     await channel.send(embed=embed)
-                
+                elif doc.id != 'reminder_channel' and diff_timestamp(doc.to_dict().get("date"),doc.to_dict().get("time")) <= 0:
+                    db.collection(id).document(doc.id).delete()
     #print("bruh")
 
 
@@ -89,10 +90,32 @@ async def setch(ctx, channel_name):
         }  
     )
 
+@bot.command()
+async def creators(ctx):
+    embed = discord.Embed(title="Neelesh Ranjan Jha", description="", color=discord.Color.green())
+    embed.add_field(name="Github:",value="https://github.com/Neeleshrj")
+    embed.set_thumbnail(url="https://avatars.githubusercontent.com/u/57111920?v=4")
+    
+    await ctx.send(embed=embed)
+
+    embed = discord.Embed(title="Naman Aggarwal", description="", color=discord.Color.blue())
+    embed.add_field(name="Github:",value="https://github.com/divinenaman")
+    embed.set_thumbnail(url="https://avatars.githubusercontent.com/u/63128054?v=4")
+    await ctx.send(embed=embed)     
+
+@bot.command()
+async def helpme(ctx):
+    embed = discord.Embed(title="All Commands", description="All commands need to be prefixed with >", color=discord.Color.red(),inline=True)
+    embed.add_field(name="To set reminder", value=">reminder \"description\" \"dd-mm-yy\" \"hh:mm\"",inline=False)
+    embed.add_field(name="To set which channel the reminders should be recived",value=">setch channel-name",inline=False)
+    embed.add_field(name="To know my overlords", value=">creators")
+    await ctx.send(embed=embed) 
+    #await ctx.send("All commands need to be prefixed with >\nThe commands are:\n>reminder \"description\" \"dd-mm-yy\" \"hh:mm\" **:To set reminder\n**>setch channel-name** :To set which channel the reminders should be recived\n**>creators** :To know my overlords\n")
+
 #events
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.Game('Baraf Pani'))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Your Requests"))
     print('Bot is ready')
     for guild in bot.guilds:
         server_list.append(str(guild.id))
@@ -103,7 +126,7 @@ async def on_ready():
 @reminder.error
 async def reminder_syntax_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send('```Please pass all argumnets in format "Description" "date" "time" ```')
+        await ctx.send('```Please pass all argumnets in format "Description" "dd-mm-yy" "HH:MM" ```')
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -112,5 +135,3 @@ async def on_command_error(ctx, error):
 
 
 bot.run('ODM3NzYyNzkxMTEyODM1MDgy.YIxRZg.OEHmsuaKoPkriCwy-f8OJb6zciw')
-
-
