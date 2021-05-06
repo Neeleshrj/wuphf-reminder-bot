@@ -1,4 +1,4 @@
-# discord-reminder-bot
+# wuphf-reminder-bot
 A basic Reminder Bot for Discord on discord.py and firebase
 
 
