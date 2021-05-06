@@ -1,2 +1,9 @@
+.env
 serviceKey.json
-README.md
+pyvenv.cfg
+
+__pycache__/
+bin/
+include/
+lib/
+lib64/

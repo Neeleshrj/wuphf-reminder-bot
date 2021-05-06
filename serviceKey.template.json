@@ -1,0 +1,15 @@
+
+// template for firebase service account config
+
+{
+  "type": "X-X",
+  "project_id": "X-X",
+  "private_key_id": "X-X",
+  "private_key": "X-X",
+  "client_email": "X-X",
+  "client_id": "X-X",
+  "auth_uri": "X-X",
+  "token_uri": "X-X",
+  "auth_provider_x509_cert_url": "X-X",
+  "client_x509_cert_url": "X-X"
+}
