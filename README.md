@@ -17,7 +17,7 @@ A basic Reminder Bot for Discord on discord.py and firebase
   - enable firestore in firebase
   - generate service account credentials in firebase and the required json as shown in `serviceKey.template.json`
 - Discord
-  - add a bot in discord developer portal and check/enable administrator and indent permissionsbbot
+  - add a bot in discord developer portal and check/enable administrator permission and intent permissions for bot
   - generate a Bot Token and copy it in `.env` file as shown `.env.template`
   
 ## Run
