@@ -1,0 +1,3 @@
+discord
+firebase_admin
+python-dotenv
