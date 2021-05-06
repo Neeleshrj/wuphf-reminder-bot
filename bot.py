@@ -84,7 +84,7 @@ async def check_reminder():
             try:                 
                 if data['date']:
                     time_differnce = diff_timestamp(data['date'],data['time'])
-                    if time_differnce == 86400 or time_differnce == 3600:            
+                    if time_differnce == 86400 or time_differnce == 3600 or time_differnce == 1:            
                         found= True
                     
                     elif time_differnce <= 0:
@@ -115,7 +115,7 @@ async def check_reminder():
 
 @bot.command()
 async def ping(ctx):
-    await ctx.send('```Pong!```')
+    await ctx.send('```Who has summoned the ancient one?```')
 
 
 # command to add reminder to database
@@ -206,7 +206,7 @@ async def setch(ctx, channel_name):
 # command to know the creators
 @bot.command()
 async def creators(ctx):
-    embed = discord.Embed(title="Neelesh Ranjan Jha", description="PAPI", color=discord.Color.green())
+    embed = discord.Embed(title="Neelesh Ranjan Jha", description="", color=discord.Color.green())
     embed.add_field(name="Github:",value="https://github.com/Neeleshrj")
     embed.set_thumbnail(url="https://avatars.githubusercontent.com/u/57111920?v=4")
     
@@ -227,7 +227,6 @@ async def helpme(ctx):
     embed.add_field(name="To find all users in a voice channel",value=">attendance channel-name",inline=False)
     embed.add_field(name="To find all users in a text channel",value=">attendance channel-name \"text\"",inline=False)
     embed.add_field(name="To know my overlords", value=">creators",inline=False)
-    embed.add_field(name="To check bot's health", value=">ping",inline=False)
     await ctx.send(embed=embed) 
     
 
