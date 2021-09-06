@@ -176,7 +176,7 @@ async def attendance(ctx, channel_name, type_channel="vc"):
         msg = ""
         i = 1
         for member in members:
-            msg += f'{i}) {member}' + "\n"
+            msg += f'{i}) {member.nick}' + "\n"
             i+=1
         
         await ctx.send(f'```{msg}```')   
